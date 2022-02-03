@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="shortcut icon" href="assets/img/TMClogo.png" type="image/png">
+  <title>Tondo Hospital</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.min.css">
+  <!-- Select 2 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.css" integrity="sha512-CbQfNVBSMAYmnzP3IC+mZZmYMP2HUnVkV4+PwuhpiMUmITtSpS7Prr3fNncV1RBOnWxzz4pYQ5EAGG4ck46Oig==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Sweet Alert -->
+  <link rel="stylesheet" href="assets/plugins/sweetalert2/sweetalert2.min.css" />
+  <!-- Theme style -->
+  <link rel="stylesheet" href="assets/css/index.css">
+  <link rel="stylesheet" href="assets/css/appointment.css" >
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body style="background-color: #e9ecef">
+  <nav class="navbar navbar-light navbar-expand-lg sticky-top" id="mainNav">
+    <div class="container"><a class="navbar-brand js-scroll-trigger" href="#page-top">Tondo Hospital</a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler float-right" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+        <div
+            class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="index.html">Home</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="sign-in.html">Sign-in</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="appointment.html">New Appointment</a></li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+  <div class="container-fluid" id="grad1">
+    <div class="row justify-content-center mt-0">
+        <div class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0">
+            <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                <h2><strong>Appointment Form</strong></h2>
+                <p>Fill all form field to go to next step</p>
+                <div class="row">
+                    <div class="col-md-12 mx-0">
+                        <form id="msform">
+                            <!-- progressbar -->
+                            <ul id="progressbar">
+                                <li class="active" id="account"><strong>Account</strong></li>
+                                <li id="personal"><strong>Personal</strong></li>
+                                <li id="reason"><strong>Appoinment Details</strong></li>
+                                <li id="confirm"><strong>Finish</strong></li>
+                            </ul> <!-- fieldsets -->
+                            <fieldset data-fieldset="0">
+                                <div class="form-card">
+                                    <h2 class="fs-title">Account Information</h2> 
+                                    <div class="form-group">
+                                      <label for="user_email">Email address</label>
+                                      <input type="email" name="email" class="form-control custom-form" id="user_email" placeholder="Enter email">
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="user_password">Password</label>
+                                      <input type="password" name="password" class="form-control custom-form" id="user_password" placeholder="Password">
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="confirm_password">Confirm Password</label>
+                                      <input type="password" name="password" class="form-control custom-form" id="confirm_password" placeholder="Password">
+                                    </div>
+                                </div> 
+                                <input type="button" name="next" class="next action-button" value="Next Step" />
+                            </fieldset>
+                            <fieldset data-fieldset="1">
+                                <div class="form-card">
+                                    <h2 class="fs-title">Personal Information</h2> 
+                                    <div class="form-group">
+                                      <label for="first_name">First Name*</label>
+                                      <input type="text" class="form-control custom-form" name="fname" id="first_name" placeholder="First Name" /> 
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="middle_name">Middle Name</label>
+                                      <input type="text" class="form-control custom-form" name="mname" id="middle_name" placeholder="Middle Name" /> 
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="last_name">Last Name*</label>
+                                      <input type="text" class="form-control custom-form" name="lname" id="last_name" placeholder="Last Name" /> 
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="prefix_name">Prefix</label>
+                                      <input type="text" class="form-control custom-form" name="lname" id="prefix_name" placeholder="Pre-fix" /> 
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="user_age">Age*</label>
+                                      <input type="number" class="form-control custom-form" name="age" id="user_age" placeholder="Age" />
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="gender">Gender</label>
+                                      <select class="form-control select2" id="gender" style="width: 100%;">
+                                        <option selected="selected" disabled>Gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="transgender">Transgender</option>
+                                      </select>
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="phone_number">Contact No.*</label>
+                                      <input type="text" name="phno" class="form-control custom-form" id="phone_number" placeholder="Contact No." /> 
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="emergency_contact">Emergency Contact</label>
+                                      <input type="text" name="phno_2" class="form-control custom-form" id="emergency_contact" placeholder="Alternate Contact No." />
+                                    </div>
+                                </div> 
+                                <input type="button" name="previous" class="previous action-button-previous btn" value="Previous" /> 
+                                <input type="button" name="next" class="next action-button" value="Next Step" />
+                            </fieldset>
+                            <fieldset data-fieldset="2">
+                                <div class="form-card">
+                                    <h2 class="fs-title">Appointment Details</h2>
+                                    <div class="form-group">
+                                      <label for="reason_for_visit">Reason For Visit*</label>
+                                      <textarea class="form-control" row="5"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="appoinement_time">Appoinment Date & Time</label>
+                                      <div class="input-group date" id="appointment_timestamp" data-target-input="nearest">
+                                        <input type="text" id="appointment" class="form-control datetimepicker-input" data-target="#appointment_timestamp"/>
+                                        <div class="input-group-append" data-target="#appointment_timestamp" data-toggle="datetimepicker">
+                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div> 
+                                <input type="button" name="previous" class="previous action-button-previous" value="Previous" /> <input type="button" name="make_payment" class="next action-button" value="Confirm" />
+                            </fieldset>
+                            <fieldset data-fieldset="3">
+                                <div class="form-card">
+                                    <h2 class="fs-title text-center">Success !</h2> <br><br>
+                                    <div class="row justify-content-center">
+                                        <div class="col-3"> <img src="https://img.icons8.com/color/96/000000/ok--v2.png" class="fit-image"> </div>
+                                    </div> <br><br>
+                                    <div class="row justify-content-center">
+                                        <div class="col-7 text-center">
+                                            <h5>You Have Successfully Appointed on the given date</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+<!-- Select 2 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- JQuery Validate -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/additional-methods.min.js" integrity="sha512-XZEy8UQ9rngkxQVugAdOuBRDmJ5N4vCuNXCh8KlniZgDKTvf7zl75QBtaVG1lEhMFe2a2DuA22nZYY+qsI2/xA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- Sweet Alert-->
+<script src="assets/plugins/sweetalert2/sweetalert2.all.min.js"></script>
+<script src="assets/plugins/sweetalert2/sweetalert2.js"></script>
+<!-- Date/Time Picker-->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js" integrity="sha512-k6/Bkb8Fxf/c1Tkyl39yJwcOZ1P4cRrJu77p83zJjN2Z55prbFHxPs9vN7q3l3+tSMGPDdoH51AEU8Vgo1cgAA==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css" integrity="sha512-3JRrEUwaCkFUBLK1N8HehwQgu8e23jTH4np5NHOmQOobuC4ROQxFwFgBLTnhcnQRMs84muMh0PnnwXlPq5MGjg==" crossorigin="anonymous" />
+<!-- Custom JS App -->
+<script src="assets/js/appoinement.js"></script>
+<script>
+</script>
+</body>
+</html>
