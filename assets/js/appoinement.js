@@ -11,11 +11,13 @@ $.fn.datetimepicker.Constructor.Default,
             clear: 'fas fa-trash',
             close: 'far fa-times' } });
 $(document).ready(function(){
+
   $("#appointment_timestamp").datetimepicker({
     fontAwesome: 'font-awesome'
   });
   var current_fs, next_fs, previous_fs; //fieldsets
   var opacity;
+  var registerValue = new FormData();
   const Toast = swal.mixin({
     toast: true,
     position: 'top-end',
@@ -25,9 +27,25 @@ $(document).ready(function(){
   $(".next").click(function(){
     current_fs = $(this).parent();
     next_fs = $(this).parent().next();
-    console.log(current_fs.attr("data-fieldset"));
+    //console.log(current_fs.attr("data-fieldset"));
+    
     if(ValidateField(current_fs.attr("data-fieldset"))){
-        //Add Class Active
+        if(current_fs.attr("data-fieldset") == '2'){
+          $.ajax({
+            url: "api/appointment.php",
+            type: 'POST',
+            data: registerValue,
+            processData: false,
+            contentType: false,
+            success : function(){
+              swal.fire("Good");
+            },
+            error : function(xhs, status, code){
+              swal.fire("Error");
+            }
+          });
+        } 
+        //Add Class Active 02/23/2022 10:32 AM
         $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
         
         //show the next fieldset
@@ -70,6 +88,21 @@ $(document).ready(function(){
     if(!email){
       ToastFire("Email is Required");
     }
+    else if(ValidateEmail(email)){
+      swal.fire({
+        title: '<strong>Email</strong>&nbsp Already Exist',
+        text: " You already had a record sign-in and create and appointment on your current account",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sure!'
+      }).then((result)=> {
+        if(result.value){
+          window.location.replace("sign-in.html");
+        }
+      });
+    }
     else if(!password){
       ToastFire("Passoword is Required");
     }
@@ -80,12 +113,18 @@ $(document).ready(function(){
       ToastFire("Password Doesn't Match");
     }
     else{
+      registerValue.append("user_email", email);
+      registerValue.append("user_password", password);
       return true;
     }
   }
   function ValidateAppointment(){
     let appointment = $('#appointment').val();
+    let reasonForVisit = $("#reason_for_visit").val();
     if(appointment){
+      registerValue.append("reason_for_visit", reasonForVisit);
+      registerValue.append("user_appointment", appointment);
+      console.log(appointment);
       return true;
     }else{
       ToastFire("Date and time of the appointment is required")
@@ -119,10 +158,37 @@ $(document).ready(function(){
       ToastFire("Please input an emergency contact number of another person");
     }
     else{
+      registerValue.append("user_first_name", firstName);
+      registerValue.append("user_middle_name", middleName);
+      registerValue.append("user_last_name", lastName);
+      registerValue.append("user_prefix", prefix);
+      registerValue.append("user_age",userAge);
+      registerValue.append("user_gender", gender);
+      registerValue.append("user_contact", contact);
+      registerValue.append("user_emergency_contact", emContact);
       return true;
     }
   }
-
+  function ValidateEmail(email){
+    let x = "";
+    $.ajax({
+      url: "api/validation/emailValidation.php",
+      type: 'POST',
+      dataType: 'JSON',
+      async: false,
+      data: {
+        user_email: email
+      },
+      success : function(data){
+        x = data.IsExist;
+      },
+      error : function(xhs, error, code){
+        console.log(xhs + " | " + error + " | " + code);
+        swal.fire("Error Occured : Call Yoshi Imediately :) Sorry :)");
+      }
+    });
+    return x;
+  }
   function ToastFire(message){
     Toast.fire({
       title: message,
@@ -155,14 +221,13 @@ $(document).ready(function(){
       duration: 600
     });
   });
-    
-  $('.radio-group .radio').click(function(){
-    $(this).parent().find('.radio').removeClass('selected');
-    $(this).addClass('selected');
-  });
   
   $(".submit").click(function(){
     return false;
-  })
+  });
+
   $('.select2').select2();
+  $("#sign-in-btn").click(function(){
+    window.location.replace("sign-in.html");
+  });
 });

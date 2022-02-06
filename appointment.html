@@ -122,7 +122,7 @@
                                     <h2 class="fs-title">Appointment Details</h2>
                                     <div class="form-group">
                                       <label for="reason_for_visit">Reason For Visit*</label>
-                                      <textarea class="form-control" row="5"></textarea>
+                                      <textarea class="form-control" row="5" id="reason_for_visit"></textarea>
                                     </div>
                                     <div class="form-group">
                                       <label for="appoinement_time">Appoinment Date & Time</label>
@@ -140,12 +140,21 @@
                                 <div class="form-card">
                                     <h2 class="fs-title text-center">Success !</h2> <br><br>
                                     <div class="row justify-content-center">
-                                        <div class="col-3"> <img src="https://img.icons8.com/color/96/000000/ok--v2.png" class="fit-image"> </div>
+                                        <div class="col-3"> 
+                                          <img src="https://img.icons8.com/color/96/000000/ok--v2.png" class="fit-image d-none" id="success"> 
+                                          <img src="assets/img/loading-spinned.gif" class="fit-image" id="loading">
+                                        </div>
                                     </div> <br><br>
                                     <div class="row justify-content-center">
                                         <div class="col-7 text-center">
-                                            <h5>You Have Successfully Appointed on the given date</h5>
+                                            <h5 id="loading-text">Please wait a Moment while we processed your information</h5>
+                                            <h5 class="d-none" id="success-text">You Have Successfully Appointed on the given date</h5>
                                         </div>
+                                    </div>
+                                    <div class="row justify-content-center">
+                                      <div class="col-5">
+                                        <button class="btn btn-lg btn-block btn-success d-none" type="button" id="sign-in-btn">Sign-in</button>
+                                      </div>
                                     </div>
                                 </div>
                             </fieldset>
