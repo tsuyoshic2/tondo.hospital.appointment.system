@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="assets/css/index.css">
+  <!-- Sweet Alert -->
+  <link rel="stylesheet" href="assets/plugins/sweetalert2/sweetalert2.min.css" />
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -36,16 +38,16 @@
 <section class="login-page" style="height: 100% !important">
   <div class="login-box">
     <div class="login-logo">
-      <a href="../../index2.html"><b>Tondo</b>Hospital</a>
+      <a href="index.html"><b>Tondo</b>Hospital</a>
     </div>
     <!-- /.login-logo -->
     <div class="card">
       <div class="card-body login-card-body">
         <p class="login-box-msg">Sign in to start your session</p>
   
-        <form action="../../index3.html" method="post">
+        <form id="login_form" method="post">
           <div class="input-group mb-3">
-            <input type="email" class="form-control" placeholder="Email">
+            <input type="email" id="user_email" class="form-control" placeholder="Email" required>
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-envelope"></span>
@@ -53,40 +55,27 @@
             </div>
           </div>
           <div class="input-group mb-3">
-            <input type="password" class="form-control" placeholder="Password">
+            <input type="password" id="user_password" class="form-control" placeholder="Password" required> 
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-lock"></span>
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-8">
-              <div class="icheck-primary">
-                <input type="checkbox" id="remember">
-                <label for="remember">
-                  Remember Me
-                </label>
-              </div>
-            </div>
-            <!-- /.col -->
-            <div class="col-4">
-              <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-            </div>
-            <!-- /.col -->
-          </div>
+          <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+          
         </form>
   
         <div class="social-auth-links text-center mb-3">
           <p>- OR -</p>
-          <a href="appointment.html" class="btn btn-block btn-primary">
+          <a href="appointment.html" class="btn btn-block btn-success">
             Appoint Schedule
           </a>
         </div>
         <!-- /.social-auth-links -->
   
         <p class="mb-1">
-          <a href="forgot-password.html">I forgot my password</a>
+          <a href="#">I forgot my password</a>
         </p>
       </div>
       <!-- /.login-card-body -->
@@ -95,10 +84,12 @@
   <!-- /.login-box -->
 </section>
 
-<!-- jQuery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
-
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Bootstrap 4 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+    <script src="assets/plugins/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="assets/plugins/sweetalert2/sweetalert2.js"></script>
+    <script src="assets/js/login.js"></script>
 </body>
 </html>

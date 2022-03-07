@@ -38,7 +38,7 @@ $(document).ready(function(){
             processData: false,
             contentType: false,
             success : function(){
-              swal.fire("Good");
+              window.location.replace("sign-in.html");
             },
             error : function(xhs, status, code){
               swal.fire("Error");
