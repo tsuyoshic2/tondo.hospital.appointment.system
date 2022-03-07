@@ -37,12 +37,11 @@ $(document).ready(function(){
             data: registerValue,
             processData: false,
             contentType: false,
-            success : function(){
-              swal.fire("Good");
-            },
             error : function(xhs, status, code){
               swal.fire("Error");
             }
+          }).done(function(){
+            window.location.replace("sign-in.html");
           });
         } 
         //Add Class Active 02/23/2022 10:32 AM
