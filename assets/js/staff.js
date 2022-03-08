@@ -12,6 +12,16 @@ $(function(){
       type: type
     });
   }
+  $.ajax({
+    url: '../api/accounts/verify.php?STAFF',
+    method: 'GET',
+    contentType: 'application/JSON',
+    success: function(data){ 
+      if(!data.IsExist){
+        window.location.replace("../api/accounts");
+      }
+    }
+  });
   function GetUserDetail(){
     $.ajax({
       url: '../api/request/GetUserDetail.php',
