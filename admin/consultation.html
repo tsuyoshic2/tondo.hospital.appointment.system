@@ -27,9 +27,9 @@
   <body>
 
     <!-- ########## START: LEFT PANEL ########## -->
-    <div class="br-logo"><a href=""><span>[</span><i>Doctor</i><span>]</span></a></div>
+    <div class="br-logo"><a href=""><span>[</span><i>Admin</i><span>]</span></a></div>
     <div class="br-sideleft sideleft-scrollbar">
-      <label class="sidebar-label pd-x-10 mg-t-20 op-3">Patient Menu</label>
+      <label class="sidebar-label pd-x-10 mg-t-20 op-3">Admin Menu</label>
       <ul class="br-sideleft-menu">
         <li class="br-menu-item">
           <a href="index.html" class="br-menu-link">
@@ -49,10 +49,14 @@
           </ul>
         </li><!-- br-menu-item -->
         <li class="br-menu-item">
-          <a href="#" class="br-menu-link">
-            <i class="menu-item-icon icon ion-ios-email-outline tx-24"></i>
-            <span class="menu-item-label">Results</span>
+          <a href="#" class="br-menu-link with-sub">
+            <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
+            <span class="menu-item-label">Staff Management</span>
           </a><!-- br-menu-link -->
+          <ul class="br-menu-sub">
+            <li class="sub-item"><a href="staff.html" class="sub-link">Staff</a></li>
+            <li class="sub-item"><a href="doctor.html" class="sub-link">Doctors</a></li>
+          </ul>
         </li><!-- br-menu-item -->
       </ul><!-- br-sideleft-menu -->
     </div><!-- br-sideleft -->
@@ -95,7 +99,7 @@
     <div class="br-mainpanel">
       <div class="br-pageheader">
         <nav class="breadcrumb pd-0 mg-0 tx-12">
-          <a class="breadcrumb-item" href="index.html">Doctor</a>
+          <a class="breadcrumb-item" href="index.html">Admin</a>
           <span class="breadcrumb-item active">Appointment</span>
           <a class="breadcrumb-item" href="my-appointments.html">My Appointment</a>
           <span class="breadcrumb-item active">Consultation</span>
@@ -148,6 +152,6 @@
     <script src="../assets/plugins/sweetalert2/sweetalert2.all.min.js"></script>
     <script src="../assets/plugins/sweetalert2/sweetalert2.js"></script>
     <script src="../assets/compo/js/custom.js"></script>
-    <script src="../assets/js/doctor.js"></script>
+    <script src="../assets/js/admin.js"></script>
   </body>
 </html>
