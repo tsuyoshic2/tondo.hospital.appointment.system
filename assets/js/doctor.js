@@ -12,6 +12,76 @@ $(function(){
       type: type
     });
   }
+  $editProfile = `
+  <div id="staff_modal" class="modal fade effect-scale">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content bd-0 tx-14">
+        <div class="modal-header pd-y-20 pd-x-25">
+          <h3 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold" id="modalHeader"></h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form id="staff_form" class="modal-body form-layout form-layout-1">
+          <div class="row mg-b-25">
+            <div class="col-lg-4">
+              <div class="form-group">
+                <label class="form-control-label">Firstname: <span class="tx-danger">*</span></label>
+                <input class="form-control" type="text" id="staff_firstname" placeholder="Enter firstname" required>
+              </div>
+            </div><!-- col-4 -->
+            <div class="col-lg-3">
+              <div class="form-group">
+                <label class="form-control-label">Middlename: </label>
+                <input class="form-control" type="text" id="staff_middlename" placeholder="Enter lastname">
+              </div>
+            </div><!-- col-4 -->
+            <div class="col-lg-3">
+              <div class="form-group">
+                <label class="form-control-label">Lastname: <span class="tx-danger">*</span></label>
+                <input class="form-control" type="text" id="staff_lastname" placeholder="Enter lastname" required>
+              </div>
+            </div><!-- col-4 -->
+            <div class="col-lg-2">
+              <div class="form-group">
+                <label class="form-control-label">Prefix:</label>
+                <input class="form-control" type="text" id="staff_prefix" placeholder="Enter Prefix">
+              </div>
+            </div><!-- col-4 -->
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label class="form-control-label">Email address: <span class="tx-danger">*</span></label>
+                <input class="form-control" type="email" id="staff_email" placeholder="Enter email address" required>
+              </div>
+            </div><!-- col-4 -->
+            <div class="col-lg-6">
+              <div class="form-group mg-b-10-force">
+                <label class="form-control-label">Password: <span class="tx-danger">*</span></label>
+                <div class="input-group">
+                  <input type="password" id="staff_password" class="form-control" placeholder="Enter Password" required>
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <label class="ckbox wd-16 mg-b-0">
+                        <i id="showPassword" class="fa fa-eye-slash"></i>
+                        <!-- <i class="fa fa-eye"></i> -->
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!-- col-8 -->
+          </div><!-- row -->
+          <div class="form-layout-footer">
+            <button class="btn btn-info">Submit</button>
+            <button class="btn btn-secondary">Cancel</button>
+          </div><!-- form-layout-footer -->
+        </form>
+      </div>
+    </div><!-- modal-dialog -->
+  </div><!-- modal -->`;
+  
+
+
   $.ajax({
     url: '../api/accounts/verify.php?DOCTOR',
     method: 'GET',
@@ -39,6 +109,38 @@ $(function(){
   }
   if(currentPage.includes("index.html") || currentPage === ""){
     GetUserDetail();
+    $.ajax({
+      url: "../api/request/GetData.php",
+      method: 'GET',
+      contentType: 'application/JSON',
+      success: function(data){
+        let ctr = 0;
+        for(let i = 0; 9> i;){
+          ctr++;
+          $parentDiv = `<div class="card-deck card-deck-sm mg-x-0 mb-5" id="row-${ctr}"></div>`;
+          $("#article").append($parentDiv);
+          for(let j = 0; j < 3 && i < 9;i++,j++){
+            $child = data[i];
+            let href = $child.Href.replace('\\', '');
+            let type = $child.Type.replace('\\','');
+            let image = $child.Image.replace('\\','');
+            let header = $child.Heading.replace('\\','');
+            let timestamp = $child.Timestamp.replace('\\', '');
+            $el = `<div class="card shadow-base bd-0 mg-0 ">
+                <figure class="card-item-img bg-mantle rounded-top">
+                  <img class="img-fluid rounded-top" src="${image}" alt="Image">
+                </figure>
+                <div class="card-body pd-25">
+                  <p class="tx-11 tx-uppercase tx-mont tx-semibold tx-info">${type + " | " + timestamp}</p>
+                  <h5 class="tx-normal tx-roboto lh-3 mg-b-15"><a href="${href}" class="tx-inverse hover-info" target="_blank">${header}</a></h5>
+                </div><!-- card-body -->
+              </div><!-- card -->`;
+            $('#row-' + ctr).prepend($el);
+          }
+        } 
+      }
+    });
+
   }
   else if(currentPage.includes("available-appointments.html")){
     GetUserDetail();

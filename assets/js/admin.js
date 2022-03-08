@@ -39,6 +39,42 @@ $(function(){
   }
   if(currentPage.includes("index.html") || currentPage === ""){
     GetUserDetail();
+    GetData();
+    function GetData(){
+      $.ajax({
+        url: "../api/request/GetData.php",
+        method: 'GET',
+        contentType: 'application/JSON',
+        success: function(data){
+          let ctr = 0;
+          for(let i = 0; 9> i;){
+            ctr++;
+            $parentDiv = `<div class="card-deck card-deck-sm mg-x-0 mb-5" id="row-${ctr}"></div>`;
+            $("#article").append($parentDiv);
+            for(let j = 0; j < 3 && i < 9;i++,j++){
+              $child = data[i];
+              let href = $child.Href.replace('\\', '');
+              let type = $child.Type.replace('\\','');
+              let image = $child.Image.replace('\\','');
+              let header = $child.Heading.replace('\\','');
+              let timestamp = $child.Timestamp.replace('\\', '');
+              $el = `<div class="card shadow-base bd-0 mg-0 ">
+                  <figure class="card-item-img bg-mantle rounded-top">
+                    <img class="img-fluid rounded-top" src="${image}" alt="Image">
+                  </figure>
+                  <div class="card-body pd-25">
+                    <p class="tx-11 tx-uppercase tx-mont tx-semibold tx-info">${type + " | " + timestamp}</p>
+                    <h5 class="tx-normal tx-roboto lh-3 mg-b-15"><a href="${href}" class="tx-inverse hover-info" target="_blank">${header}</a></h5>
+                  </div><!-- card-body -->
+                </div><!-- card -->`;
+              $('#row-' + ctr).prepend($el);
+            }
+          } 
+        }
+      });
+
+    }
+
   }
   else if(currentPage.includes("staff.html")){
     ShowStaff();
