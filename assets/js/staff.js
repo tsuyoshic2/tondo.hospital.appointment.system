@@ -12,6 +12,155 @@ $(function(){
       type: type
     });
   }
+  const editModal = `<div id="edit_modal" class="modal fade effect-scale">
+      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content bd-0 tx-14">
+          <div class="modal-header pd-y-20 pd-x-25">
+            <h3 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">Edit Profile</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form id="edit_form" class="modal-body form-layout form-layout-1">
+            <div class="row mg-b-25">
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label class="form-control-label">Firstname: <span class="tx-danger">*</span></label>
+                  <input class="form-control" type="text" id="user_firstname" placeholder="Enter firstname" required>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-3">
+                <div class="form-group">
+                  <label class="form-control-label">Middlename: </label>
+                  <input class="form-control" type="text" id="user_middlename" placeholder="Enter middlename">
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-3">
+                <div class="form-group">
+                  <label class="form-control-label">Lastname: <span class="tx-danger">*</span></label>
+                  <input class="form-control" type="text" id="user_lastname" placeholder="Enter lastname" required>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-2">
+                <div class="form-group">
+                  <label class="form-control-label">Prefix:</label>
+                  <input class="form-control" type="text" id="user_prefix" placeholder="Enter Prefix">
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-control-label">Email address: <span class="tx-danger">*</span></label>
+                  <input class="form-control" type="email" id="user_email" placeholder="Enter email address" required>
+                </div>
+              </div><!-- col-4 -->
+              <div class="col-lg-6">
+                <div class="form-group mg-b-10-force">
+                  <label class="form-control-label">Password: <span class="tx-danger">*</span></label>
+                  <div class="input-group">
+                    <input type="password" id="user_password" class="form-control" placeholder="Enter Password" required>
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <label class="ckbox wd-16 mg-b-0">
+                          <i id="editShowPassword" class="fa fa-eye-slash"></i>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-layout-footer">
+              <button class="btn btn-info">Submit</button>
+              <button class="btn btn-secondary">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>`;
+  $(editModal).insertAfter(".br-mainpanel");
+  $("#editProfile").click(function(){
+    EmptyEditModal();
+    $.ajax({
+      url: '../api/request/EditProfile.php?GetUserInfo',
+      method: 'GET',
+      contentType: 'application/JSON',
+      success: function(data){
+        $("#user_firstname").val(data.FirstName);
+        $("#user_middlename").val(data.MiddleName);
+        $("#user_lastname").val(data.LastName);
+        $("#user_prefix").val(data.Prefix);
+        $("#user_email").val(data.Email);
+        $("#user_password").val(data.UserPassword);
+        $("#edit_modal").modal('toggle');
+      },
+      error: function(xhr, status, code){
+        console.log(code)
+      }
+    })
+  });
+  $("#editShowPassword").click(function(){
+    $(this).toggleClass("fa-eye-slash fa-eye");
+    if($(this).hasClass("fa-eye-slash")){
+      $("#user_password").attr("type", "password");
+    }else{
+      $("#user_password").attr("type", "text");
+    }
+  });
+  $("#edit_form").submit(function(x){
+    x.preventDefault();
+    if(ValidateUserEmail($("#user_email").val())){
+      ToastFire("Email Already Exist", "error");
+    }else{
+      $.ajax({
+        url: '../api/request/EditProfile.php',
+        type: 'POST',
+        data:{
+          UpdateUserStaff: 0,
+          firstName: $("#user_firstname").val(),
+          middleName: $("#user_middlename").val(),
+          lastName: $("#user_lastname").val(),
+          prefix: $("#user_prefix").val(),
+          email: $("#user_email").val(),
+          password: $("#user_password").val()
+        },
+        success: function(){
+          ToastFire("Profile Updated", 'success');
+        },
+        error: function(xhr, status, code){
+          console.log(code);
+        }
+      });
+    }
+  });
+  function ValidateUserEmail(email){
+    let x = "";
+    $.ajax({
+      url: "../api/validation/emailValidation.php",
+      type: 'POST',
+      dataType: 'JSON',
+      async: false,
+      data: {
+        existingUser: email
+      },
+      success : function(data){
+        x = data.IsExist;
+      },
+      error : function(xhs, error, code){
+        console.log(xhs + " | " + error + " | " + code);
+        console.log(email);
+        swal.fire("Error Occured : Call Yoshi Imediately :) Sorry :)");
+      }
+    });
+    return x;
+  }
+  function EmptyEditModal(){
+    $("#user_firstname").val("");
+    $("#user_middlename").val("");
+    $("#user_lastname").val("");
+    $("#user_prefix").val("");
+    $("#user_email").val("");
+    $("#user_password").val("");
+  }
   $.ajax({
     url: '../api/accounts/verify.php?STAFF',
     method: 'GET',
